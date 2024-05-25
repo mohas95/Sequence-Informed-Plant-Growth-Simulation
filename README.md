@@ -1,6 +1,6 @@
 # Sequence-Informed-Plant-Growth-Simulation
 
-[Corresponding Paper](https://arxiv.org/abs/2405.14796)
+Corresponding Paper: [ArXiv](https://arxiv.org/abs/2405.14796)
 
 ![](/result_small.gif)
 
@@ -16,5 +16,4 @@
       archivePrefix={arXiv},
       primaryClass={cs.CV}
 }
-
 ```
