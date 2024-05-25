@@ -1,4 +1,4 @@
-# Sequence-Informed-Plant-Growth-Simulation
+# Sequence Informed Generative Plant Growth Simulation
 
 Corresponding Paper: [ArXiv](https://arxiv.org/abs/2405.14796)
 
