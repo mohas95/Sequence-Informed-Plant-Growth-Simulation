@@ -1,4 +1,6 @@
 # Sequence-Informed-Plant-Growth-Simulation
 
 
-![](https://github.com/mohas95/Sequence-Informed-Plant-Growth-Simulation/result_small.gif)
+![](/result_small.gif)
+
+<img src="/art/sample.gif?raw=true" width="200px">
