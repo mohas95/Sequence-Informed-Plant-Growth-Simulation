@@ -1,6 +1,6 @@
 # Sequence Informed Generative Plant Growth Simulation
 
-Corresponding Paper: [ArXiv](https://arxiv.org/abs/2405.14796)
+**Corresponding Paper:** [ArXiv](https://arxiv.org/abs/2405.14796)
 
 ![](/result_small.gif)
 
