@@ -1,3 +1,3 @@
 # Sequence-Informed-Plant-Growth-Simulation
 
-![Description](https://drive.google.com/uc?export=view&id=1kt5MwhwknkWhphXDyxDAtCozYbL7Jqg2)
+![Description](https://www.dropbox.com/scl/fi/zgetdvfy13u6wvfenu3ar/result.gif?rlkey=0d00im0i0phn4e30pwi6oqpjn&raw=1)
