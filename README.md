@@ -5,7 +5,7 @@
 
 ## Supplemental Figures
 
-![](./Figures/result_small.gif)
+![](/figures/result_small.gif)
 
 
 
