@@ -2,6 +2,9 @@
 
 **Corresponding Paper:** [ArXiv](https://arxiv.org/abs/2405.14796)
 
+
+## Supplemental Figures
+
 ![](/result_small.gif)
 
 
