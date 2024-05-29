@@ -11,7 +11,6 @@
 
 ### Fig. S2
 
-
 ![](/figures/S2_beta.gif)
 
 
