@@ -5,7 +5,15 @@
 
 ## Supplemental Figures
 
-![](/figures/result_small.gif)
+### Fig. S1
+
+![](/figures/S1_outputs.gif)
+
+### Fig. S2
+
+
+![](/figures/S2_beta.gif)
+
 
 
 
