@@ -186,76 +186,6 @@ def images_to_video(image_folder, video_name, fps):
 
 
 
-# class GardynDataset(Dataset):
-#     def __init__(self, annotations_file, img_dir, camera = 'camera2', cumulative = True, params = ['Temperature_C', 'Humidity_percent', 'EC', 'PH', 'WaterTemp_C'] ,  transform=None):
-#         """
-#         Args:
-#             annotations_file (string): Path to the csv file with annotations.
-#             img_dir (string): Directory with all the images.
-#             transform (callable, optional): Optional transform to be applied on a sample.
-#         """
-
-#         self.img_dir = img_dir
-#         self.annotations_file = annotations_file
-#         self.cumulative = cumulative
-#         self.transform = transform
-#         self.key = params + ['timestamp', 'time_interval']
-        
-        
-#         ## import data from data csv and filter data to entries of existing files in image dataset
-#         annotation_data = pd.read_csv(self.annotations_file)
-#         annotation_data['file_exists'] = annotation_data[camera].apply(lambda x: os.path.exists(os.path.join(self.img_dir, x)))
-#         self.annotation_data = annotation_data
-#         self.existing_data = self.annotation_data[self.annotation_data['file_exists']]
-
-#         ## extract time stamps and image labels
-#         self.img_list = self.existing_data['camera2'].tolist()
-#         timestamps = self.existing_data['_time'].tolist()
-
-#         ## Normalize timestamps and generate intervals
-#         self.timestamps = [datetime.datetime.fromisoformat(ts).timestamp() for ts in timestamps]
-#         self.timestamps_normalized = [ts - self.timestamps[0] for ts in self.timestamps]
-#         time_intervals = [ts - self.timestamps_normalized[i] for i,ts in enumerate(self.timestamps_normalized[1:])]
-#         self.time_intervals = [0] + time_intervals
-
-#         labels = self.existing_data[params].interpolate(method='linear')
-#         labels['timestamp'] = self.timestamps_normalized
-#         labels['time_interval'] = self.time_intervals
-#         self.labels = labels
-
-#         self.total_sequence_length = len(self.img_list)
-
-
-#     def __len__(self):
-#         return len(self.img_list)
-
-#     def __getitem__(self, idx):
-#         img_path = os.path.join(self.img_dir, self.img_list[idx])
-        
-#         image = Image.open(img_path).convert('RGB')
-
-#         ts = self.labels['timestamp'].iloc[idx]
-        
-#         if self.transform:
-#             image = self.transform(image)
-
-#         if not self.cumulative:
-#             label = self.labels.iloc[idx].to_numpy()
-            
-#             return image, torch.from_numpy(label), torch.tensor(ts)
-                      
-#         else:
-#             label = self.labels.iloc[:idx+1].to_numpy()
-
-#             sequence_length = label.shape[0]
-
-#             pad_width = ((0,self.total_sequence_length- sequence_length),(0,0))
-            
-#             label = np.pad(label, pad_width, 'constant', constant_values=(0))
-                    
-#             return image, torch.from_numpy(label).float(), torch.tensor(sequence_length), torch.tensor(ts).float()
-
-
 
 class GardynDataset_cum(Dataset):
     def __init__(self, annotations_file, img_dir, camera = 'camera2', cumulative = True, params = ['Temperature_C', 'Humidity_percent', 'EC', 'PH', 'WaterTemp_C'] ,  transform=None):
@@ -557,6 +487,80 @@ class GardynDataset(Dataset):
             label = np.pad(label, pad_width, 'constant', constant_values=(0))
                     
             return image, torch.from_numpy(label).float(), torch.tensor(sequence_length), torch.tensor(ts).float()
+
+
+
+class envDataset(Dataset):
+    def __init__(self, annotations_file, normalized =True, cumulative = True, params = ['Temperature_C', 'Humidity_percent', 'EC', 'PH', 'WaterTemp_C']):
+        """
+        Args:
+            annotations_file (string): Path to the csv file with annotations.
+            img_dir (string): Directory with all the images.
+            transform (callable, optional): Optional transform to be applied on a sample.
+        """
+        self.annotations_file = annotations_file
+        self.cumulative = cumulative
+        self.key = params + ['timestamp', 'time_interval']
+        
+        ## import data from data csv and filter data to entries of existing files in image dataset
+        annotation_data = pd.read_csv(self.annotations_file)
+        self.annotation_data = annotation_data
+        timestamps = self.annotation_data['_time'].tolist()
+
+        ## Normalize timestamps and generate intervals
+        self.timestamps = [datetime.datetime.fromisoformat(ts).timestamp() for ts in timestamps]
+        self.timestamps = [ts - self.timestamps[0] for ts in self.timestamps]
+        timestamps_np = np.array(self.timestamps)
+        min_time = np.min(timestamps_np)
+        max_time = np.max(timestamps_np)
+
+        normalized_timestamps_np = (timestamps_np - min_time) / (max_time - min_time)
+        self.timestamps_normalized = normalized_timestamps_np.tolist()
+
+        labels = self.annotation_data[params].interpolate(method='linear')
+
+        if normalized:
+            for param in params:
+                labels[param] = (labels[param] - labels[param].min()) / (labels[param].max() - labels[param].min())
+
+            time_intervals = [ts - self.timestamps_normalized[i] for i,ts in enumerate(self.timestamps_normalized[1:])]
+            labels['timestamp'] = self.timestamps_normalized
+
+        else:
+            time_intervals = [ts - self.timestamps[i] for i,ts in enumerate(self.timestamps[1:])]
+            labels['timestamp'] = self.timestamps
+
+        self.time_intervals = [0] + time_intervals
+        
+        labels['time_interval'] = self.time_intervals
+        self.labels = labels
+
+        self.total_sequence_length = len(self.labels)
+
+
+    def __len__(self):
+        return len(self.labels)
+
+    def __getitem__(self,idx):
+        
+        ts = self.labels['timestamp'].iloc[idx]
+
+        if not self.cumulative:
+            label = self.labels.iloc[idx].to_numpy()
+            
+            return torch.from_numpy(label).float(), torch.tensor(ts).float()
+                      
+        else:
+            label = self.labels.iloc[:idx+1].to_numpy()
+            
+            sequence_length = label.shape[0]
+
+            pad_width = ((0,self.total_sequence_length- sequence_length),(0,0))
+            
+            label = np.pad(label, pad_width, 'constant', constant_values=(0))
+                    
+            return torch.from_numpy(label).float(), torch.tensor(sequence_length), torch.tensor(ts).float()
+
 
 
 
