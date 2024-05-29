@@ -14,8 +14,23 @@
 ![](/figures/S2_beta.gif)
 
 
-
-
+## Required Python Libaries
+- Jupyter-lab
+      - pip install jupyterlab
+-  pytorch
+      - pip install torch torchvision torchaudio
+- pandas
+      - pip install pandas
+- matplotlib
+      - pip install matplotlib
+- scipy
+      - pip install scipy
+- opencv
+      - pip install opencv-python
+- Sci-kit learn
+      - pip install scikit-learn
+- tqdm
+      - pip install tqdm
 ## Cite this work
 ```bibtex
 @misc{debbagh2024generative,
