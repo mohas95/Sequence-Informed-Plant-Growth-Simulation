@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 from scipy import linalg
 import random
 import cv2
+import shutil
+
 
 
 str_format = '%Y%m%d%H%M%S'
@@ -88,14 +90,18 @@ def save_model_config(model_type, pt_file, model_params, json_filename):
     with open(json_filename, 'w') as json_file:
         json.dump(config, json_file, indent=4)
 
-def initiate_dir(dir):
+def initiate_dir(dir, replace=False):
     if not os.path.exists(dir):
         # Create the directory
         os.makedirs(dir)
         print(f"Directory '{dir}' created.")
     else:
         print(f"Directory '{dir}' already exists.")
-
+        if replace:
+            shutil.rmtree(dir)
+            os.makedirs(dir)
+            print(f"Directory '{dir}' replaced.")
+            
     return dir
 
 def save_metrics(model_name, mse_loss, fid_score, json_filename):

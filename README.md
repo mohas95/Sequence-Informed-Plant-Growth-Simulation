@@ -13,6 +13,42 @@
 
 ![](/figures/S2_beta.gif)
 
+### Fig. S3
+#### LSTM Encoder
+| Layer Type         | Output Shape         | Kernel Size / Stride / Padding | Activation Function |
+|--------------------|----------------------|--------------------------------|---------------------|
+| Input              | (None, sequence_length, feature_size) |                                |                     |
+| LSTM               | (None, sequence_length, hidden_size)  |                                |                     |
+| Fully Connected    | (None, output_size)                    |                                | Tanh                |
+
+
+#### CVAE_Generator Architecture
+| Layer Type         | Output Shape            | Kernel Size / Stride / Padding | Activation Function |
+|--------------------|-------------------------|--------------------------------|---------------------|
+| Input              | (None, input_channels, height, width) |                                |                     |
+| Conv2d             | (None, 64, height/2, width/2)          | 4x4 / 2 / 1                    | ReLU                |
+| Conv2d             | (None, 128, height/4, width/4)         | 4x4 / 2 / 1                    | ReLU                |
+| Conv2d             | (None, 256, height/8, width/8)         | 4x4 / 2 / 1                    | ReLU                |
+| Conv2d             | (None, 512, height/16, width/16)       | 4x4 / 2 / 1                    | ReLU                |
+| Linear (mu)        | (None, latent_size)                    |                                |                     |
+| Linear (logvar)    | (None, latent_size)                    |                                |                     |
+| Linear (z)         | (None, hidden_size)                    |                                |                     |
+| ConvTranspose2d    | (None, 256, height/8, width/8)         | 4x4 / 2 / 1                    | ReLU                |
+| ConvTranspose2d    | (None, 128, height/4, width/4)         | 4x4 / 2 / 1                    | ReLU                |
+| ConvTranspose2d    | (None, 64, height/2, width/2)          | 4x4 / 2 / 1                    | ReLU                |
+| ConvTranspose2d    | (None, 3, height, width)               | 4x4 / 2 / 1                    | Sigmoid             |
+
+#### Discriminator Architecture
+| Layer Type         | Output Shape            | Kernel Size / Stride / Padding | Activation Function |
+|--------------------|-------------------------|--------------------------------|---------------------|
+| Input              | (None, input_channels, height, width) |                                |                     |
+| Conv2d             | (None, 64, height/2, width/2)          | 4x4 / 2 / 1                    | ReLU                |
+| Conv2d             | (None, 128, height/4, width/4)         | 4x4 / 2 / 1                    | ReLU                |
+| Conv2d             | (None, 256, height/8, width/8)         | 4x4 / 2 / 1                    | ReLU                |
+| Conv2d             | (None, 512, height/16, width/16)       | 4x4 / 2 / 1                    | ReLU                |
+| Fully Connected    | (None, 512)                             |                                | ReLU                |
+| Fully Connected    | (None, 1)                               |                                | Sigmoid             |
+
 
 ## Required Python Libaries
 ``` bash
