@@ -13,7 +13,7 @@
 
 ![](/figures/S2_beta.gif)
 
-### Fig. S3
+<!-- ### Fig. S3
 #### LSTM Encoder
 | Layer Type         | Output Shape         | Kernel Size / Stride / Padding | Activation Function |
 |--------------------|----------------------|--------------------------------|---------------------|
@@ -47,7 +47,7 @@
 | Conv2d             | (None, 256, height/8, width/8)         | 4x4 / 2 / 1                    | ReLU                |
 | Conv2d             | (None, 512, height/16, width/16)       | 4x4 / 2 / 1                    | ReLU                |
 | Fully Connected    | (None, 512)                             |                                | ReLU                |
-| Fully Connected    | (None, 1)                               |                                | Sigmoid             |
+| Fully Connected    | (None, 1)                               |                                | Sigmoid             | -->
 
 
 ## Required Python Libaries
