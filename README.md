@@ -35,6 +35,7 @@ cd Sequence-Informed-Plant-Growth-Simulation
 
 ### Install the required Python Libraries
 #### create a virtual environment(optional)
+install [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html) dependencies
 ```bash 
 sudo apt update
 sudo apt install python3-pip
