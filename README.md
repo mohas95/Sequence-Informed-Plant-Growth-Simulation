@@ -85,6 +85,6 @@ cd Sequence-Informed-Plant-Growth-Simulation
 source venv/bin/activate
 jupyter-lab
 ```
-ommit line 2 `source venv/bin/activate` if you are not using a virtual environment
+omit line 2 `source venv/bin/activate` if you are not using a virtual environment
 
-Jupyer lab will open, now open [Sequence-Informed-Plant-Growth-Simulation/Run-Plant-Simulation.ipynb](/Run-Plant-Simulation.ipynb) in the browser interface and follow notebook instructions.
+Jupyter lab will open, now open [Sequence-Informed-Plant-Growth-Simulation/Run-Plant-Simulation.ipynb](/Run-Plant-Simulation.ipynb) in the browser interface and follow notebook instructions.
