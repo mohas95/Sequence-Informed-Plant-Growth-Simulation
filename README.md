@@ -17,6 +17,7 @@
 
 ## Supplemental Figures
 
+**Please allow a few second for figures to load*
 ### Fig. S1
 
 ![](/figures/S1_outputs.gif)
