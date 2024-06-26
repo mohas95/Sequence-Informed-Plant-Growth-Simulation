@@ -64,33 +64,36 @@ def download_model(key):
         print(f'download unsuccessful error code{response.status_code}')
         sys.exit()
 
-def SI_PGS(beta='0.90', device = 'cpu'):
+def SI_PGS(beta='0.90', device = 'cpu', custom_dir = False):
 
-    initiate_dir(MODEL_DIR)
-
-    if beta == '0.90':
-        key = 'SIPGS-beta0.90-pretrained.zip'
-    elif beta == '0.75':
-        key = 'SIPGS-beta0.75-pretrained.zip'
-    elif beta == '0.50':
-        key = 'SIPGS-beta0.50-pretrained.zip'
-    elif beta == '0.25':
-        key = 'SIPGS-beta0.25-pretrained.zip'
+    if custom_dir:
+        model_location = custom_dir
     else:
-        print(f'beta = {beta} not a valid model')
-
-
-    ##Check if model already exists
-
-    model_location = os.path.join(MODEL_DIR, key.split(".zip")[0])
-
-    if not os.path.exists(model_location) or not os.listdir(model_location):
-
-        print(f'No model found, downloading {key} from {PRETRAINED_MODEL_REPO}')
-
-        initiate_dir(model_location, True)
-
-        download_model(key)
+        initiate_dir(MODEL_DIR)
+    
+        if beta == '0.90':
+            key = 'SIPGS-beta0.90-pretrained.zip'
+        elif beta == '0.75':
+            key = 'SIPGS-beta0.75-pretrained.zip'
+        elif beta == '0.50':
+            key = 'SIPGS-beta0.50-pretrained.zip'
+        elif beta == '0.25':
+            key = 'SIPGS-beta0.25-pretrained.zip'
+        else:
+            print(f'beta = {beta} not a valid model')
+    
+    
+        ##Check if model already exists
+    
+        model_location = os.path.join(MODEL_DIR, key.split(".zip")[0])
+    
+        if not os.path.exists(model_location) or not os.listdir(model_location):
+    
+            print(f'No model found, downloading {key} from {PRETRAINED_MODEL_REPO}')
+    
+            initiate_dir(model_location, True)
+    
+            download_model(key)
 
     feature_encoder_params, feature_encoder_pt_file = load_model_config(f'{model_location}/feature_encoder.json')
     generator_params, generator_pt_file = load_model_config(f'{model_location}/generator.json')
@@ -108,22 +111,26 @@ def SI_PGS(beta='0.90', device = 'cpu'):
     return feature_encoder, generator, discriminator
 
 
-def SI_PGS_R(device = 'cpu'):
-    initiate_dir(MODEL_DIR)
+def SI_PGS_R(device = 'cpu', custom_dir = False):
 
-    key = 'SIPGS-R-pretrained.zip'
-
-    ##Check if model already exists
-
-    model_location = os.path.join(MODEL_DIR, key.split(".zip")[0])
-
-    if not os.path.exists(model_location) or not os.listdir(model_location):
-
-        print(f'No model found, downloading {key} from {PRETRAINED_MODEL_REPO}')
-
-        initiate_dir(model_location, True)
-
-        download_model(key)
+    if custom_dir:
+        model_location = custom_dir
+    else:
+        initiate_dir(MODEL_DIR)
+    
+        key = 'SIPGS-R-pretrained.zip'
+    
+        ##Check if model already exists
+    
+        model_location = os.path.join(MODEL_DIR, key.split(".zip")[0])
+    
+        if not os.path.exists(model_location) or not os.listdir(model_location):
+    
+            print(f'No model found, downloading {key} from {PRETRAINED_MODEL_REPO}')
+    
+            initiate_dir(model_location, True)
+    
+            download_model(key)
 
     feature_encoder_params, feature_encoder_pt_file = load_model_config(f'{model_location}/feature_encoder.json')
     generator_params, generator_pt_file = load_model_config(f'{model_location}/generator.json')
@@ -142,22 +149,25 @@ def SI_PGS_R(device = 'cpu'):
 
 
 
-def cGAN(device = 'cpu'):
-    initiate_dir(MODEL_DIR)
-
-    key = 'cGAN-pretrained.zip'
-
-    ##Check if model already exists
-
-    model_location = os.path.join(MODEL_DIR, key.split(".zip")[0])
-
-    if not os.path.exists(model_location) or not os.listdir(model_location):
-
-        print(f'No model found, downloading {key} from {PRETRAINED_MODEL_REPO}')
-
-        initiate_dir(model_location, True)
-
-        download_model(key)
+def cGAN(device = 'cpu', custom_dir = False):
+    if custom_dir:
+        model_location = custom_dir
+    else:
+        initiate_dir(MODEL_DIR)
+    
+        key = 'cGAN-pretrained.zip'
+    
+        ##Check if model already exists
+    
+        model_location = os.path.join(MODEL_DIR, key.split(".zip")[0])
+    
+        if not os.path.exists(model_location) or not os.listdir(model_location):
+    
+            print(f'No model found, downloading {key} from {PRETRAINED_MODEL_REPO}')
+    
+            initiate_dir(model_location, True)
+    
+            download_model(key)
 
     generator_params, generator_pt_file = load_model_config(f'{model_location}/generator.json')
     dicriminator_params, discriminator_pt_file= load_model_config(f'{model_location}/discriminator.json')
