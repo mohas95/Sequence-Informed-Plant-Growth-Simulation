@@ -7,7 +7,6 @@
 
 ## Cite this work
 ```bibtex
-debbagh2024generative
 @InProceedings{10.1007/978-3-031-71602-7_26,
 author="Debbagh, Mohamed
 and Liu, Yixue
