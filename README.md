@@ -1,19 +1,27 @@
 # Sequence Informed Generative Plant Growth Simulation
 
-**Corresponding Paper:** [ArXiv](https://arxiv.org/abs/2405.14796)
+**Corresponding Paper:** [Springer](https://doi.org/10.1007/978-3-031-71602-7_26), [ArXiv](https://arxiv.org/abs/2405.14796)
 
 
 **Abstract:** A plant growth simulation can be characterized as a reconstructed visual representation of a plant or plant system. The phenotypic characteristics and plant structures are controlled by the scene environment and other contextual attributes. Considering the temporal dependencies and compounding effects of various factors on growth trajectories, we formulate a probabilistic approach to the simulation task by solving a frame synthesis and pattern recognition problem. We introduce a Sequence-Informed Plant Growth Simulation framework (SI-PGS) that employs a conditional generative model to implicitly learn a distribution of possible plant representations within a dynamic scene from a fusion of low dimensional temporal sensor and context data. Methods such as controlled latent sampling and recurrent output connections are used to improve coherence in plant structures between frames of predictions. In this work, we demonstrate that SI-PGS is able to capture temporal dependencies and continuously generate realistic frames of a plant scene.
 
 ## Cite this work
 ```bibtex
-@misc{debbagh2024generative,
-      title={Generative Plant Growth Simulation from Sequence-Informed Environmental Conditions}, 
-      author={Mohamed Debbagh and Yixue Liu and Zhouzhou Zheng and Xintong Jiang and Shangpeng Sun and Mark Lefsrud},
-      year={2024},
-      eprint={2405.14796},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+debbagh2024generative
+@InProceedings{10.1007/978-3-031-71602-7_26,
+author="Debbagh, Mohamed
+and Liu, Yixue
+and Zheng, Zhouzhou
+and Jiang, Xintong
+and Sun, Shangpeng
+and Lefsrud, Mark",
+title="Generative Plant Growth Simulation from Sequence-Informed Environmental Conditions",
+booktitle="Artificial Neural Networks in Pattern Recognition",
+year="2024",
+publisher="Springer Nature Switzerland",
+address="Cham",
+pages="308--319",
+isbn="978-3-031-71602-7"
 }
 ```
 
